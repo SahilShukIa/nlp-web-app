@@ -16,8 +16,8 @@ def register():
 
 @app.route('/perform_registration',methods=['post'])
 def perform_registration():
-    name = request.form.get('user_name')
-    email = request.form.get('user_email')
+    name = request.form.get('user_name','').strip().lower()
+    email = request.form.get('user_email','').strip().lower()
     password = request.form.get('user_password')
 
     response = dbo.insert(name,email,password)
@@ -31,7 +31,7 @@ def perform_registration():
 
 @app.route('/perform_login',methods=['post'])
 def perform_login():
-    email = request.form.get('user_email')
+    email = request.form.get('user_email','').strip().lower()
     password = request.form.get('user_password')
 
     verify = dbo.search(email,password)
